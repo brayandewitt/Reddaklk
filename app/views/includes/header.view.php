@@ -112,7 +112,7 @@
                                 	<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/login">Login</a></li>
                                     <li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/register">Register</a></li>
 									<?php else:?>
-									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/logout">Logout</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/logout">logout</a></li>
 									<?php endif;?>
 									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/tracking">Tracking</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/elements">Elements</a></li>

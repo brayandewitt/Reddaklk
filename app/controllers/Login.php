@@ -16,13 +16,10 @@ class Login extends Controller
             'email'=>$_POST['email'],
          ]);
 
-         
-      
-
          if($row){
-               if(password_verify($_POST['password'], $row['password'])){
+               if(password_verify($_POST['password'], $row->password)){
                   //authentiction
-                  
+                 
                  Auth::authenticate($row);
                   redirect('home');
                }

@@ -8,11 +8,12 @@ class Auth
 {
    public static function authenticate($row)
     {
-
+        
         if(is_object($row)){
 
             $_SESSION['USER_DATA'] = $row;
         }
+        
     }
 
     public static function logout()
@@ -29,7 +30,9 @@ class Auth
     }
 
     public static function logged_in(){
+        
         if(!empty($_SESSION['USER_DATA'])){
+            
             return true;
         
         }
@@ -47,5 +50,10 @@ class Auth
         }
 
         return false;
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        echo "hi";
     }
 }

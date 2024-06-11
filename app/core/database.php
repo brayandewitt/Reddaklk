@@ -20,9 +20,9 @@ class Database
             $check = $stm->execute($data);
             if ($check) {
              if ($type == 'object') {
-                    $type = pdo::FETCH_ASSOC;
+                    $type = pdo::FETCH_OBJ;
                 }else{
-                $type = pdo::FETCH_OBJ;
+                $type = pdo::FETCH_ASSOC;
 
                 }
 
