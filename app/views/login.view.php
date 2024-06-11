@@ -1,5 +1,5 @@
 	<!-- Start Header Area -->
-<?php $this->view('includes/header',$data)?>	<!-- End Header Area -->
+	<?php $this->view('includes/header', $data) ?> <!-- End Header Area -->
 
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
@@ -34,12 +34,20 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Log in to enter</h3>
-						<form class="row login_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+						<?php if (message()) : ?>
+							<div class="alert alert-danger text-center"><?= message('', true) ?></div>
+						<?php endif; ?>
+						<?php if (!empty($errors['email'])) : ?>
+							<div class="alert alert-danger text-center"><?= $errors['email'] ?></div>
+						<?php endif; ?>
+
+						<form class="row login_form" method="post" id="contactForm">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input value="<?= set_value('email'); ?>" type="text" class="form-control" id="email" name="email" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<input value="<?= set_value('password'); ?>" type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
@@ -58,4 +66,4 @@
 		</div>
 	</section>
 	<!--================End Login Box Area =================-->
-<?php $this->view('includes/footer',$data) ?>
+	<?php $this->view('includes/footer', $data) ?>

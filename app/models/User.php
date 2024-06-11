@@ -29,14 +29,13 @@ class User extends Model
         if (empty($data['lastname'])) {
             $this->errors['lastname'] = "A last name is required";
         }
-        
-        if (!filter_var($data['email'],FILTER_VALIDATE_EMAIL)) {
+        if (empty($data['email'])) {
+            $this->errors['email'] = "A email is required";
+        } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = "email is not valid";
-        }else
-        if ($this->where(['email'=>$data['email']])) {
+        } else if ($this->where(['email' => $data['email']])) {
             $this->errors['email'] = "That email already exists";
         }
-
         if (empty($data['password'])) {
             $this->errors['password'] = "A password is required";
         }
@@ -51,7 +50,4 @@ class User extends Model
         }
         return false;
     }
-
-
-    
 }

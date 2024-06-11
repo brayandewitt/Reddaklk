@@ -16,7 +16,7 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-    <title><?=APP_NAME?></title>
+    <title><?=ucfirst(APP::$page)?> - <?=APP_NAME?></title>
 	<!--
 		CSS
 		============================================= -->
@@ -108,8 +108,12 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Pages</a>
 								<ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/login">Login</a></li>
+								<?php if(!Auth::logged_in()):?>
+                                	<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/login">Login</a></li>
                                     <li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/register">Register</a></li>
+									<?php else:?>
+									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/logout">Logout</a></li>
+									<?php endif;?>
 									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/tracking">Tracking</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/elements">Elements</a></li>
 								</ul>
