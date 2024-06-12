@@ -20,7 +20,7 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="<?=ROOT?>/admin/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+              <img src="<?=ROOT?>/<?=$row->image?>" alt="Profile" style="width: 150px; max-width: 150px; height: 150px; object-fit: cover;" class="rounded-circle">
               <h2><?=esc(ucfirst($row->firstname))?> <?=esc(ucfirst($row->lastname))?></h2>
               <h3><?=esc(ucfirst($row->role))?></h3>
               <div class="social-links mt-2">
@@ -93,7 +93,7 @@
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
                         <div class="d-flex ">
-                        <img class="js-image-preview" src="<?=ROOT?>/admin/img/profile-img.jpg" alt="Profile" >
+                        <img class="js-image-preview" src="<?=ROOT?>/<?=$row->image?>" >
                         <div class="js-filename m-2">Selected File: None</div>
                         </div>
                         <div class="pt-2">

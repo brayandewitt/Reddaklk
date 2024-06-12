@@ -34,13 +34,17 @@ class Admin extends Controller
                 file_put_contents("uploads/index.php", "<?php //silence");
             }
 
+            
             $allowed = ['image/jpeg', 'image/png'];
             if (!empty($_FILES['image']['name'])) {
                 if ($_FILES['image']['error'] == 0) {
                     if (in_array($_FILES['image']['type'], $allowed)) {
-
-                        $destination = $folder.time().$_FILES['image']['name'];
+                       $destination = $folder.time().$_FILES['image']['name'];
                         move_uploaded_file($_FILES['image']['tmp_name'], $destination);
+                        $_POST['image'] = $destination; 
+                        if(file_exists($row->image)){
+                            unlink($row->image);
+                        }
                     } else {
                         $user->errors['image'] = "This file type not allowed";
                     }
