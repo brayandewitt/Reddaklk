@@ -169,7 +169,7 @@
 
                     <div class="text-center">
                         <a href="<?=ROOT?>/admin/dashbord">
-                      <button type="button" class="btn btn-primary float-end">back</button>
+                      <button type="button" class="btn btn-primary float-start">back</button>
                       </a>
                       <button type="submit" class="btn btn-danger float-end">Save Changes</button>
                     </div>
