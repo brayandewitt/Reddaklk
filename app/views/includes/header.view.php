@@ -122,7 +122,7 @@
                                 	<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/login">Login</a></li>
                                     <li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/register">Register</a></li>
 									<?php else:?>
-										<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/admin">Dashbord</a></li>
+										<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/admin/dashbord">Dashbord</a></li>
 										<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/profile">profile</a></li>
 										<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/settings">Settings</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/logout">logout</a></li>
