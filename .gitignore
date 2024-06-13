@@ -245,3 +245,5 @@ $RECYCLE.BIN/
 # Custom
 .env
 dev/local
+niceadmin
+karma-master
