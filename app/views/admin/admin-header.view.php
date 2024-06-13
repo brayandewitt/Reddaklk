@@ -210,7 +210,7 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="<?=ROOT?>/<?=Auth::getimage()?>" alt="Profile" class="rounded-circle" style=" object-fit: cover;">
+                        <img src="<?= ROOT ?>/<?= $row->image ?>" alt="Profile" class="rounded-circle" style=" object-fit: cover;">
                         <span class="d-none d-md-block dropdown-toggle ps-2 "><?= ucfirst(substr(Auth::getFirstname(), 0, 1)) ?>.<?= Auth::getLastname() ?></span>
                     </a><!-- End Profile Iamge Icon -->
 
@@ -254,7 +254,7 @@
                         </li>
 
                         <li>
-                            <a class="dropdown-item d-flex align-items-center" href="<?=ROOT?>/logout">
+                            <a class="dropdown-item d-flex align-items-center" href="<?= ROOT ?>/logout">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Sign Out</span>
                             </a>
@@ -274,31 +274,31 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="<?=ROOT?>/admin/dashbord">
+                <a class="nav-link " href="<?= ROOT ?>/admin/dashbord">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link " href="<?=ROOT?>/admin/courses">
+                <a class="nav-link " href="<?= ROOT ?>/admin/courses">
                     <i class="bi bi bi-tag-fill"></i>
                     <span>category</span>
                 </a>
             </li><!-- End Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link " href="<?=ROOT?>/admin/courses">
+                <a class="nav-link " href="<?= ROOT ?>/admin/courses">
                     <i class="bi bi-handbag-fill"></i>
                     <span>My product</span>
                 </a>
             </li><!-- End Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link " href="<?=ROOT?>/admin/courses">
+                <a class="nav-link " href="<?= ROOT ?>/admin/courses">
                     <i class="bi bi-coin"></i>
                     <span>sales</span>
                 </a>
             </li><!-- End Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link " href="<?=ROOT?>/admin/profile">
+                <a class="nav-link " href="<?= ROOT ?>/admin/profile">
                     <i class="bi bi-person"></i>
                     <span>profile</span>
                 </a>
@@ -306,15 +306,19 @@
 
             <li class="nav-heading">go to</li>
             <li class="nav-item">
-                <a class="nav-link " href="<?=ROOT?>/home">
+                <a class="nav-link " href="<?= ROOT ?>/home">
                     <i class="bi bi-house-door-fill"></i>
                     <span>Home</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-            
-           
+
+
 
         </ul>
 
     </aside><!-- End Sidebar-->
     <main id="main" class="main">
+
+        <?php if (message()) : ?>
+            <div class="alert alert-success text-center"><?= message('', true) ?></div>
+        <?php endif; ?>

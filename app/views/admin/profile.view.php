@@ -123,8 +123,8 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="address" type="text" class="form-control" id="Address" value="<?=set_value('address',$row->address)?>">
                       </div>
-                      <?php if (!empty($errors['addres'])) : ?>
-									<span class="text-danger  font-weight-bold"><?= $errors['addres'] ?></span>
+                      <?php if (!empty($errors['address'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['address'] ?></span>
 								<?php endif; ?>
                     </div>
 

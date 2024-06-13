@@ -34,7 +34,7 @@ class Admin extends Controller
                 file_put_contents("uploads/index.php", "<?php //silence");
             }
 
-            if ($user->edit_validate($data)) {
+            if ($user->edit_validate($_POST, $id)) {
 
                 $allowed = ['image/jpeg', 'image/png'];
                 if (!empty($_FILES['image']['name'])) {
@@ -54,6 +54,7 @@ class Admin extends Controller
                     }
                 }
                 $user->update($id, $_POST);
+                message("profile saved succesfully");
                 redirect('admin/profile/' . $id);
             }
         }

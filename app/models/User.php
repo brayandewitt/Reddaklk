@@ -16,7 +16,7 @@ class User extends Model
         'role',
         'date',
         'mobile',
-        'addres',
+        'address',
         'slug',
         'image',
 
@@ -31,12 +31,12 @@ class User extends Model
         if (empty($data['firstname'])) {
             $this->errors['firstname'] = "A first name is required";
         }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['firstname']))) {
-            $this->errors['firstname'] = "A first name is required";
+            $this->errors['firstname'] = "first name can only have letters without spaces";
         }
         if (empty($data['lastname'])) {
-            $this->errors['lastname'] = "last name can only have letters without spaces";
-        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
             $this->errors['lastname'] = "A last name is required";
+        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
+            $this->errors['lastname'] = "last name can only have letters without spaces";
         }
         if (empty($data['email'])) {
             $this->errors['email'] = "A email is required";
@@ -60,7 +60,7 @@ class User extends Model
         return false;
     }
 
-    public function edit_validate($data)
+    public function edit_validate($data ,$id)
     {
 
         $this->errors = [];
@@ -68,25 +68,30 @@ class User extends Model
         if (empty($data['firstname'])) {
             $this->errors['firstname'] = "A first name is required";
         }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['firstname']))) {
-            $this->errors['firstname'] = "A first name is required";
+            $this->errors['firstname'] = "first name can only have letters without spaces";
         }
         if (empty($data['lastname'])) {
-            $this->errors['lastname'] = "last name can only have letters without spaces";
-        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
             $this->errors['lastname'] = "A last name is required";
+        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
+            $this->errors['lastname'] = "last name can only have letters without spaces";
         }
         if (empty($data['email'])) {
             $this->errors['email'] = "A email is required";
         } else if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $this->errors['email'] = "email is not valid";
-        } else if ($this->where(['email' => $data['email']])) {
-            $this->errors['email'] = "That email already exists";
+        } else if ($result = $this->where(['email' => $data['email']])) {
+            foreach ($result as $result) {
+                if($id != $result->id){
+                    $this->errors['email'] = "That email already exists";
+                }
+            }
+            
         }
         if (empty($data['address'])) {
             $this->errors['address'] = "Address is required";
         }
-        if (empty($data['phone'])) {
-            $this->errors['phone'] = "mobile number is required";
+        if (!preg_match("/^[0]{1}[7]{1}[01245678]{1}[0-9]{7}+$/", trim($data['mobile']))) {
+            $this->errors['mobile'] = "mobile number is required";
         }
         
         if (empty($this->errors)) {
