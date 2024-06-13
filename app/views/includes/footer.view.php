@@ -72,7 +72,7 @@
 			</div>
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-<script>document.write(new Date().getFullYear());</script> All rights reserved <a href="https://nerdtechlk.com" target="_blank">BS Tech Solutions</a>
+<script>document.write(new Date().getFullYear());</script> All rights reserved <a href="https://nerdtechlk.com" target="_blank">BTech Solutions</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 </p>
 			</div>

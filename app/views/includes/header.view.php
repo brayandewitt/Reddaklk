@@ -16,7 +16,7 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-    <title><?=APP_NAME?></title>
+    <title><?=ucfirst(APP::$page)?> - <?=APP_NAME?></title>
 	<!--
 		CSS
 		============================================= -->
@@ -108,13 +108,28 @@
 								<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								 aria-expanded="false">Pages</a>
 								<ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/login">Login</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/register">Register</a></li>
+								
 									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/tracking">Tracking</a></li>
 									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/elements">Elements</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/contact">Contact</a></li>
 								</ul>
 							</li>
-							<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/contact">Contact</a></li>
+							<li class="nav-item submenu dropdown">
+								<a href="#" class="nav-link dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true"
+								 aria-expanded="false">Hi, <?=Auth::getFirstname()?></a>
+								<ul class="dropdown-menu">
+								<?php if(!Auth::logged_in()):?>
+                                	<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/login">Login</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/register">Register</a></li>
+									<?php else:?>
+										<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/admin/dashbord">Dashbord</a></li>
+										<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/profile">profile</a></li>
+										<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/settings">Settings</a></li>
+									<li class="nav-item"><a class="nav-link" href="<?= ROOT ?>/logout">logout</a></li>
+									<?php endif;?>
+								</ul>
+							</li>
+							
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="#" class="cart"><span class="ti-bag"></span></a></li>

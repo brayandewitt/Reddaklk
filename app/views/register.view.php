@@ -1,6 +1,7 @@
 	<!-- Start Header Area -->
-<?php $this->view('includes/header',$data)?>	<!-- End Header Area -->
+	<?php $this->view('includes/header', $data) ?> <!-- End Header Area -->
 
+	
 	<!-- Start Banner Area -->
 	<section class="banner-area organic-breadcrumb">
 		<div class="container">
@@ -14,7 +15,7 @@
 				</div>
 			</div>
 		</div>
-	</section> 
+	</section>
 	<!-- End Banner Area -->
 
 	<!--================Login Box Area =================-->
@@ -34,30 +35,44 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Rgister to enter</h3>
-						<form class="row login_form"  method="post" id="contactForm" novalidate>
+						<form class="row login_form" method="post" id="contactForm" novalidate>
 							<div class="col-md-6 form-group">
-								<input value="<?= set_value('firstname');?>" type="text" class="form-control" id="firstname" name="firstname" placeholder="Firstname" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Firstname'">
-                            </div>
-                            <div class="col-md-6 form-group">
-								<input value="<?= set_value('lastname');?>" type="text" class="form-control" id="lastname" name="lastname" placeholder="Lastname" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Lastname'">
-                            </div>
-                            <div class="col-md-12 form-group text-start">
-								<input value="<?= set_value('email');?>" type="text" class="form-control <?=!empty($errors['email']) ?'border-danger':''; ?>" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
-								<?php if(!empty($errors['email'])):?>
-								<span class="text-danger  font-weight-bold"><?=$errors['email']?></span>
-								<?php endif;?>
+								<input value="<?= set_value('firstname'); ?>" type="text" class="form-control <?= !empty($errors['firstname']) ? 'border-danger' : ''; ?>" id="firstname" name="firstname" placeholder="Firstname" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Firstname'">
+								<?php if (!empty($errors['firstname'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['firstname'] ?></span>
+								<?php endif; ?>
+							</div>
+							<div class="col-md-6 form-group">
+								<input value="<?= set_value('lastname'); ?>" type="text" class="form-control <?= !empty($errors['lastname']) ? 'border-danger' : ''; ?>" id="lastname" name="lastname" placeholder="Lastname" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Lastname'">
+								<?php if (!empty($errors['lastname'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['lastname'] ?></span>
+								<?php endif; ?>
+							</div>
+							<div class="col-md-12 form-group text-start">
+								<input value="<?= set_value('email'); ?>" type="text" class="form-control <?= !empty($errors['email']) ? 'border-danger' : ''; ?>" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+								<?php if (!empty($errors['email'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['email'] ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="col-md-12 form-group">
-								<input value="<?= set_value('password');?>" type="password" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <input value="<?= set_value('retypepassword');?>" type="password" class="form-control" id="retypepassword" name="retypepassword" placeholder="Retype Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'">
-                                <div class="invalid-feedback"></div>
+								<input value="<?= set_value('password'); ?>" type="password" class="form-control <?= !empty($errors['password']) ? 'border-danger' : ''; ?>" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+								<?php if (!empty($errors['password'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['password'] ?></span>
+								<?php endif; ?>
+							</div>
+							<div class="col-md-12 form-group">
+								<input value="<?= set_value('retypepassword'); ?>" type="password" class="form-control " id="retypepassword" name="retypepassword" placeholder="Retype Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Retype Password'">
+								<?php if (!empty($errors['retypepassword'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['retypepassword'] ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
-									<input \<?= set_value('terms') ? 'checked':'';?> type="checkbox" id="f-option2" name="terms">
+									<input <?= set_value('terms') ? 'checked' : ''; ?> type="checkbox" id="f-option2" name="terms">
 									<label for="f-option2">I agree and accepts the terms and conditions</label>
+									<?php if (!empty($errors['terms'])) : ?>
+										<span class="text-danger  font-weight-bold"><?= $errors['terms'] ?></span>
+									<?php endif; ?>
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
@@ -70,4 +85,4 @@
 		</div>
 	</section>
 	<!--================End Login Box Area =================-->
-<?php $this->view('includes/footer',$data) ?>
+	<?php $this->view('includes/footer', $data) ?>
