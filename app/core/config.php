@@ -18,7 +18,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
     define('DBHOST','localhost');
     define('DBNAME','reddaklk');
     define('DBUSER','root');
-    define('DBPASS','Dewittbrayan123c@');
+    define('DBPASS','');
     define('DBDRIVER','mysql');
 //local server root path e.glocalhost/
     define('ROOT','http://localhost/reddaklk/public');
@@ -27,7 +27,7 @@ if($_SERVER['SERVER_NAME'] == 'localhost'){
     define('DBHOST','localhost');
     define('DBNAME','reddaklk');
     define('DBUSER','root');
-    define('DBPASS','Dewittbrayan123c@');
+    define('DBPASS','');
     define('DBDRIVER','mysql');
 //online server root path e.g.www.hostname.com/
     define('ROOT','https://localhost/reddaklk/public');
