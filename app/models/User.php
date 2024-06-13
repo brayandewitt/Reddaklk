@@ -30,8 +30,12 @@ class User extends Model
 
         if (empty($data['firstname'])) {
             $this->errors['firstname'] = "A first name is required";
+        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['firstname']))) {
+            $this->errors['firstname'] = "A first name is required";
         }
         if (empty($data['lastname'])) {
+            $this->errors['lastname'] = "last name can only have letters without spaces";
+        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
             $this->errors['lastname'] = "A last name is required";
         }
         if (empty($data['email'])) {
@@ -63,8 +67,12 @@ class User extends Model
 
         if (empty($data['firstname'])) {
             $this->errors['firstname'] = "A first name is required";
+        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['firstname']))) {
+            $this->errors['firstname'] = "A first name is required";
         }
         if (empty($data['lastname'])) {
+            $this->errors['lastname'] = "last name can only have letters without spaces";
+        }else if (!preg_match("/^[a-zA-Z]+$/", trim($data['lastname']))) {
             $this->errors['lastname'] = "A last name is required";
         }
         if (empty($data['email'])) {
@@ -73,6 +81,12 @@ class User extends Model
             $this->errors['email'] = "email is not valid";
         } else if ($this->where(['email' => $data['email']])) {
             $this->errors['email'] = "That email already exists";
+        }
+        if (empty($data['address'])) {
+            $this->errors['address'] = "Address is required";
+        }
+        if (empty($data['phone'])) {
+            $this->errors['phone'] = "mobile number is required";
         }
         
         if (empty($this->errors)) {

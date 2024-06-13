@@ -210,7 +210,7 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="<?= ROOT ?>/<?=$row->image?>" alt="Profile" class="rounded-circle" style="width: 30px; object-fit: cover;">
+                        <img src="<?=ROOT?>/<?=Auth::getimage()?>" alt="Profile" class="rounded-circle" style=" object-fit: cover;">
                         <span class="d-none d-md-block dropdown-toggle ps-2 "><?= ucfirst(substr(Auth::getFirstname(), 0, 1)) ?>.<?= Auth::getLastname() ?></span>
                     </a><!-- End Profile Iamge Icon -->
 

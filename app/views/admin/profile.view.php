@@ -23,12 +23,6 @@
               <img src="<?=ROOT?>/<?=$row->image?>" alt="Profile" style="width: 150px; max-width: 150px; height: 150px; object-fit: cover;" class="rounded-circle">
               <h2><?=esc(ucfirst($row->firstname))?> <?=esc(ucfirst($row->lastname))?></h2>
               <h3><?=esc(ucfirst($row->role))?></h3>
-              <div class="social-links mt-2">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-              </div>
             </div>
           </div>
 
@@ -42,19 +36,19 @@
               <ul class="nav nav-tabs nav-tabs-bordered">
 
                 <li class="nav-item">
-                  <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                  <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="border-0" data-bs-toggle="tab" data-bs-target="#profile-overview" id="profile-overview-tab">Overview</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Edit Profile</button>
+                  <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="border-0" data-bs-toggle="tab" data-bs-target="#profile-edit" id="profile-edit-tab">Edit Profile</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Settings</button>
+                  <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="border-0" data-bs-toggle="tab" data-bs-target="#profile-settings" id="profile-setting-tab">Settings</button>
                 </li>
 
                 <li class="nav-item">
-                  <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button>
+                  <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="border-0" data-bs-toggle="tab" data-bs-target="#profile-change-password" id="profile-change-password-tab">Change Password</button>
                 </li>
 
               </ul>
@@ -111,25 +105,37 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="firstname" type="text" class="form-control" id="firstname" value="<?=set_value('firstname',$row->firstname)?>">
                       </div>
+                      <?php if (!empty($errors['firstname'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['firstname'] ?></span>
+								<?php endif; ?>
                     </div>
                     <div class="row mb-3">
                       <label for="lastname" class="col-md-4 col-lg-3 col-form-label">last Name</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="lastname" type="text" class="form-control" id="lastname" value="<?=set_value('lastname',$row->lastname)?>">
                       </div>
+                      <?php if (!empty($errors['lastname'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['lastname'] ?></span>
+								<?php endif; ?>
                     </div>
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="address" type="text" class="form-control" id="Address" value="<?=set_value('address',$row->address)?>">
                       </div>
+                      <?php if (!empty($errors['addres'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['addres'] ?></span>
+								<?php endif; ?>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="<?=set_value('mobile',$row->mobile)?>">
+                        <input name="mobile" type="text" class="form-control" id="Phone" value="<?=set_value('mobile',$row->mobile)?>">
                       </div>
+                      <?php if (!empty($errors['mobile'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['mobile'] ?></span>
+								<?php endif; ?>
                     </div>
 
                     <div class="row mb-3">
@@ -137,36 +143,10 @@
                       <div class="col-md-8 col-lg-9">
                         <input name="email" type="email" class="form-control" id="Email" value="<?=set_value('email',$row->email)?>">
                       </div>
+                      <?php if (!empty($errors['email'])) : ?>
+									<span class="text-danger  font-weight-bold"><?= $errors['email'] ?></span>
+								<?php endif; ?>
                     </div>
-
-                    <div class="row mb-3">
-                      <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
-                      </div>
-                    </div>
-
                     <div class="text-center">
                         <a href="<?=ROOT?>/admin/dashbord">
                       <button type="button" class="btn btn-primary float-start">back</button>
@@ -270,6 +250,23 @@
 
     <script>
 
+      var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab"): "#profile-overview";
+
+      if(typeof tab == 'undefined'){
+
+        var tab = "#profile-edit";
+      }
+
+      function show_tab(tab_name){
+        const someTabTriggerEl = document.querySelector(tab_name +"-tab");
+        const tab = new bootstrap.Tab(someTabTriggerEl);
+        tab.show();
+      }
+      function set_tab(tab_name){
+        tab = tab_name;
+        sessionStorage.setItem("tab", tab_name);
+      }
+
         function load_image(file){
             document.querySelector(".js-filename").innerHTML = "Selected File: " + file.name;
             var mylink = window.URL.createObjectURL(file);
@@ -277,6 +274,9 @@
             document.querySelector(".js-image-preview").src =  mylink;
         }
 
+        window.onload = function(){
+          show_tab(tab);
+        }
     </script>
 
 <?php $this->view('admin/admin-footer',$data)?>
