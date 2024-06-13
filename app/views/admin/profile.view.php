@@ -155,7 +155,7 @@
                     <a href="<?= ROOT ?>/admin/dashbord">
                       <button type="button" class="btn btn-primary float-start">back</button>
                     </a>
-                    <button type="button" onclick="save_profile()" type="submit" class="btn btn-danger float-end">Save Changes</button>
+                    <button type="submit" onclick="save_profile()" type="button"  class="btn btn-danger float-end">Save Changes</button>
                   </div>
                 </form><!-- End Profile Edit Form -->
 
@@ -285,14 +285,22 @@
   // upload functions
   function save_profile() {
     var image = document.querySelector(".js-profile-image-input");
+    var allowed = ['jpg','jpeg','png'];
+    if(typeof image.files[0] == 'object'){
+      var ext = image.files[0].name.split(".").pop();
+    }
+    if(!allowed.includes(ext.toLowerCase())){
+      alert("Only these file types are allowed in profile image: "+allowed.toString(","));
+      return;
+    }
     send_data({
       pic: image.files[0]
     });
   }
 
-  function send_data(obj) {
+  function send_data(obj, progbar = 'js-prog') {
 
-    var prog = document.querySelector(".js-prog");
+    var prog = document.querySelector("."+progbar);
     prog.children[0].style.width = "0%";
     prog.classList.remove("hide");
     var myform = new FormData();
@@ -304,6 +312,7 @@
       if (ajax.readyState == 4) {
         if (ajax.status == 200) {
           alert("upload complete");
+          window.location.reload();
         } else {
           alert("an error occurred");
         }
