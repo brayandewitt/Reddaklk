@@ -155,7 +155,7 @@
                     <a href="<?= ROOT ?>/admin/dashbord">
                       <button type="button" class="btn btn-primary float-start">back</button>
                     </a>
-                    <button type="submit" type="button" onclick="save_profile(event)" class="btn btn-danger float-end">Save Changes</button>
+                    <button  type="button" onclick="save_profile(event)" type="submit" class="btn btn-danger float-end">Save Changes</button>
                   </div>
                 </form><!-- End Profile Edit Form -->
 
@@ -332,8 +332,9 @@
     ajax.addEventListener('readystatechange', function() {
       if (ajax.readyState == 4) {
         if (ajax.status == 200) {
-          alert("upload complete");
-          window.location.reload();
+          //alert("upload complete");
+          //window.location.reload();
+          handle_result(ajax.responseText);
         } else {
           alert("an error occurred");
         }
@@ -347,6 +348,19 @@
     ajax.open('post', '', true);
     ajax.send(myform);
   }
+
+  function handle_result(result){
+    var obj = JSON.parse(result);
+    if(typeof obj == 'object'){
+
+      if(typeof obj.errors == 'object'){
+        alert(obj.errors);
+      }else{
+        alert("Data saved successfully!");
+      }
+    }
+  }
+
 </script>
 
 <?php $this->view('admin/admin-footer', $data) ?>
