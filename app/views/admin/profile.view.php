@@ -103,7 +103,7 @@
                   <div class="row mb-3">
                     <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>">
+                      <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>" required>
                     </div>
                     <?php if (!empty($errors['firstname'])) : ?>
                       <span class="text-danger  font-weight-bold"><?= $errors['firstname'] ?></span>
@@ -112,7 +112,7 @@
                   <div class="row mb-3">
                     <label for="lastname" class="col-md-4 col-lg-3 col-form-label">last Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>">
+                      <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>" required>
                     </div>
                     <?php if (!empty($errors['lastname'])) : ?>
                       <span class="text-danger  font-weight-bold"><?= $errors['lastname'] ?></span>
@@ -141,7 +141,7 @@
                   <div class="row mb-3">
                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="Email" value="<?= set_value('email', $row->email) ?>">
+                      <input name="email" type="email" class="form-control" id="Email" value="<?= set_value('email', $row->email) ?>" required>
                     </div>
                     <?php if (!empty($errors['email'])) : ?>
                       <span class="text-danger  font-weight-bold"><?= $errors['email'] ?></span>
@@ -155,7 +155,7 @@
                     <a href="<?= ROOT ?>/admin/dashbord">
                       <button type="button" class="btn btn-primary float-start">back</button>
                     </a>
-                    <button type="submit" onclick="save_profile()" type="button"  class="btn btn-danger float-end">Save Changes</button>
+                    <button type="submit" type="button" onclick="save_profile(event)" class="btn btn-danger float-end">Save Changes</button>
                   </div>
                 </form><!-- End Profile Edit Form -->
 
@@ -283,24 +283,45 @@
   }
 
   // upload functions
-  function save_profile() {
-    var image = document.querySelector(".js-profile-image-input");
-    var allowed = ['jpg','jpeg','png'];
-    if(typeof image.files[0] == 'object'){
-      var ext = image.files[0].name.split(".").pop();
+  function save_profile(e) {
+
+    var form = e.currentTarget.form;
+    var inputs = form.querySelectorAll("input,textarea");
+    var obj = {};
+    var image_added = false;
+
+    for (let i = 0; i < inputs.length; i++) {
+      var key = inputs[i].name;
+      if (key == 'image') {
+        if (typeof inputs[i].files[0] == 'object') {
+          obj[key] = inputs[i].files[0];
+          image_added = true;
+        }
+      } else {
+
+        obj[key] = inputs[i].value;
+      }
+
     }
-    if(!allowed.includes(ext.toLowerCase())){
-      alert("Only these file types are allowed in profile image: "+allowed.toString(","));
-      return;
+    
+    //validate image
+    if(image_added){
+
+      var allowed = ['jpg', 'jpeg', 'png'];
+      if (typeof obj.image == 'object') {
+        var ext = obj.image.name.split(".").pop();
+      }
+      if (!allowed.includes(ext.toLowerCase())) {
+        alert("Only these file types are allowed in profile image: " + allowed.toString(","));
+        return;
+      }
     }
-    send_data({
-      pic: image.files[0]
-    });
+    send_data(obj);
   }
 
   function send_data(obj, progbar = 'js-prog') {
 
-    var prog = document.querySelector("."+progbar);
+    var prog = document.querySelector("." + progbar);
     prog.children[0].style.width = "0%";
     prog.classList.remove("hide");
     var myform = new FormData();

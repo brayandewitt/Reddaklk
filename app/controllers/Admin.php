@@ -25,7 +25,7 @@ class Admin extends Controller
         $user = new User();
         $data['row'] = $row = $user->first(['id' => $id]);
 
-        if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
+        if ($_SERVER['REQUEST_METHOD'] == "POST" && $row && false) {
 
             $folder = "uploads/images/";
             if (!file_exists($folder)) {
