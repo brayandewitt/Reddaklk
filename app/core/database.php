@@ -62,7 +62,7 @@ class Database
         `id` int NOT NULL AUTO_INCREMENT,
         `users_id` int NOT NULL,
         `name` varchar(100) DEFAULT NULL,
-        `category` varchar(45) DEFAULT NULL,
+        `category_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
         `description` varchar(1000) DEFAULT NULL,
         `price` double DEFAULT NULL,
         `date` date DEFAULT NULL,
@@ -73,16 +73,18 @@ class Database
         `image2` varchar(1024) DEFAULT NULL,
         `image3` varchar(1024) DEFAULT NULL,
         `image4` varchar(1024) DEFAULT NULL,
+        `approved` tinytext,
+        `published` tinytext,
         PRIMARY KEY (`id`),
         KEY `fk_product_users1_idx` (`users_id`),
         KEY `name` (`name`),
         KEY `date` (`date`),
-        KEY `category` (`category`),
         KEY `color` (`color`),
+        KEY `category` (`category_id`) USING BTREE,
         CONSTRAINT `fk_product_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-          ";
+        ";
         $this->query($query);
     }
 }

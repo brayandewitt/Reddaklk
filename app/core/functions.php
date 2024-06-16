@@ -7,15 +7,34 @@ function show($stuff)
     print_r($stuff);
     echo "</pre>";
 }
+function get_date($date){
+    return date("jS M, Y", strtotime($date));
+}
 function set_value($key, $default = '')
 {
     if (!empty($_POST[$key])) {
         return $_POST[$key];
-    }else if (!empty($default)) {
+    } else if (!empty($default)) {
         return $default;
     }
 
-    
+
+    return '';
+}
+function set_select($key, $value, $default = '')
+{
+    if (!empty($_POST[$key])) {
+        if ($value == $_POST[$key]) {
+            return ' selected ';
+        }
+    } else if (!empty($default)) {
+        if($value == $default){
+
+            return ' selected ';
+        }
+    }
+
+
     return '';
 }
 
@@ -58,11 +77,12 @@ function str_to_url($url)
     return $url;
 }
 
-function resize_image($filename,$max_size = 700){
+function resize_image($filename, $max_size = 700)
+{
 
     $ext = explode(".", $filename);
     $ext = strtolower(end($ext));
-    if(file_exists($filename)){
+    if (file_exists($filename)) {
 
         switch ($ext) {
             case 'png':
@@ -75,19 +95,19 @@ function resize_image($filename,$max_size = 700){
             case 'jpeg':
                 $image = imagecreatefromjpeg($filename);
                 break;
-            
+
             default:
-            $image = imagecreatefromjpeg($filename);
+                $image = imagecreatefromjpeg($filename);
                 break;
         }
 
         $src_w = imagesx($image);
         $src_h = imagesy($image);
 
-        if($src_w > $src_h){
+        if ($src_w > $src_h) {
             $dst_w = $max_size;
             $dst_h = ($src_h / $src_w) * $max_size;
-        }else{
+        } else {
             $dst_w = ($src_h / $src_w) * $max_size;
             $dst_h = $max_size;
         }
@@ -95,9 +115,9 @@ function resize_image($filename,$max_size = 700){
         $dst_image = imagecreatetruecolor($dst_w, $dst_h);
 
         imagecopyresampled($dst_image, $image, 0, 0, 0, 0, $dst_w, $dst_h, $src_w, $src_h);
-        
+
         imagedestroy($image);
-        imagejpeg($dst_image, $filename,90);
+        imagejpeg($dst_image, $filename, 90);
         switch ($ext) {
             case 'png':
                 $image = imagecreatefrompng($filename);
@@ -109,9 +129,9 @@ function resize_image($filename,$max_size = 700){
             case 'jpeg':
                 $image = imagecreatefromjpeg($filename);
                 break;
-            
+
             default:
-            $image = imagecreatefromjpeg($filename);
+                $image = imagecreatefromjpeg($filename);
                 break;
         }
         imagedestroy($dst_image);
