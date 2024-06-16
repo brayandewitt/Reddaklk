@@ -13,6 +13,28 @@ class Admin extends Controller
         $data['tittle'] = "Dashbord";
         $this->view('admin/dashbord', $data);
     }
+
+
+    public function product($action = null, $id = null){
+        if (!Auth::logged_in()) {
+            message('please login to view admin section');
+            redirect('login');
+        }
+        $id = $id ?? Auth::getId();
+        
+        $data['action'] = $action;
+        $data['id'] = $id;
+        $data['tittle'] = "Product";
+
+        if($action == 'add'){
+            $category = new Category();
+            $data ['categories'] = $category->findAll('asc');
+        }
+
+        $this->view('admin/product', $data);
+    }
+
+
     public function profile($id = null)
     {
         if (!Auth::logged_in()) {

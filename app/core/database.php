@@ -15,15 +15,14 @@ class Database
     {
 
         $con = $this->connect();
-        $stm = $con->prepare($query); 
+        $stm = $con->prepare($query);
         if ($stm) {
             $check = $stm->execute($data);
             if ($check) {
-             if ($type == 'object') {
+                if ($type == 'object') {
                     $type = pdo::FETCH_OBJ;
-                }else{
-                $type = pdo::FETCH_ASSOC;
-
+                } else {
+                    $type = pdo::FETCH_ASSOC;
                 }
 
                 $result = $stm->fetchAll($type);
@@ -34,13 +33,12 @@ class Database
         }
 
         return false;
-        
+    }
+    public function create_table()
+    {
+        //user table
 
-}
-	public function create_table(){
-		//user table
-
-		$query = "
+        $query = "
 			CREATE TABLE IF NOT EXISTS `users`(
 			`id` int(11) NOT NULL AUTO_INCREMENT,
 			`email`varchar(100) NOT NULL,
@@ -57,7 +55,34 @@ class Database
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 		";
         $this->query($query);
-	}
 
+        //product table
+        $query = "
+        CREATE TABLE IF NOT EXISTS `product` (
+        `id` int NOT NULL AUTO_INCREMENT,
+        `users_id` int NOT NULL,
+        `name` varchar(100) DEFAULT NULL,
+        `category` varchar(45) DEFAULT NULL,
+        `description` varchar(1000) DEFAULT NULL,
+        `price` double DEFAULT NULL,
+        `date` date DEFAULT NULL,
+        `stock` varchar(10) DEFAULT NULL,
+        `color` varchar(20) DEFAULT NULL,
+        `tags` varchar(1000) DEFAULT NULL,
+        `image1` varchar(1024) DEFAULT NULL,
+        `image2` varchar(1024) DEFAULT NULL,
+        `image3` varchar(1024) DEFAULT NULL,
+        `image4` varchar(1024) DEFAULT NULL,
+        PRIMARY KEY (`id`),
+        KEY `fk_product_users1_idx` (`users_id`),
+        KEY `name` (`name`),
+        KEY `date` (`date`),
+        KEY `category` (`category`),
+        KEY `color` (`color`),
+        CONSTRAINT `fk_product_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+          ";
+        $this->query($query);
+    }
 }
