@@ -5,6 +5,9 @@ $dotenv->load();
 
 //show($_ENV);die;
 
+/**
+ * local server 
+ */
 $dbconnection = $_ENV["DB_CONNECTION"];
 $dbhost = $_ENV["DB_HOST"];
 $dbport = $_ENV["DB_PORT"];
@@ -14,7 +17,7 @@ $dbpasssword = $_ENV["DB_PASSWORD"];
 
 
 /**
- * server 
+ * online server 
  */
 
 $svconnection = $_ENV["SV_CONNECTION"];
@@ -54,21 +57,5 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
     define('DBDRIVER', $svconnection);
     //online server root path e.g.www.hostname.com/
     define('ROOT', 'https://localhost/reddaklk/public');
-
-    define('DBHOST','localhost');
-    define('DBNAME','reddaklk');
-    define('DBUSER','root');
-    define('DBPASS','');
-    define('DBDRIVER','mysql');
-//local server root path e.glocalhost/
-    define('ROOT','http://localhost/reddaklk/public');
-}else{
-    //database config for live server
-    define('DBHOST','localhost');
-    define('DBNAME','reddaklk');
-    define('DBUSER','root');
-    define('DBPASS','');
-    define('DBDRIVER','mysql');
-//online server root path e.g.www.hostname.com/
 
 }

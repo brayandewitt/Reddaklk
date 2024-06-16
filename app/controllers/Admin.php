@@ -25,8 +25,9 @@ class Admin extends Controller
         $user = new User();
         $data['row'] = $row = $user->first(['id' => $id]);
 
-        if ($_SERVER['REQUEST_METHOD'] == "POST" && $row) {
+        if ($_SERVER['REQUEST_METHOD'] == "POST" && $row ) {
 
+            
             $folder = "uploads/images/";
             if (!file_exists($folder)) {
                 mkdir($folder, 0777, true);
@@ -55,9 +56,20 @@ class Admin extends Controller
                     }
                 }
                 $user->update($id, $_POST);
-                message("profile saved succesfully");
-                redirect('admin/profile/' . $id);
+                
+                //message("profile saved succesfully");
+                //redirect('admin/profile/' . $id);
             }
+            if(empty($user->errors)){
+
+                $arr ['message'] = "Profile saved successfully";
+            }else{
+                $arr ['message'] = "Please correct these errors";
+                $arr ['errors'] = $user->errors;
+
+            }
+            echo json_encode($arr);
+            die;
         }
 
         $data['tittle'] = "Profile";
