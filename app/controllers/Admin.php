@@ -58,6 +58,7 @@ class Admin extends Controller
         }else{
             //product view 
             $data['rows'] = $product->where(['user_id'=>$user_id]);
+            
         }
 
         $this->view('admin/product', $data);

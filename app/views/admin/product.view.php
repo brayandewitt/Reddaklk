@@ -39,7 +39,7 @@
 <?php elseif ($action == 'edit') : ?>
 <?php else : ?>
 
-  <div class="card">
+  <div class="card m-md-5">
     <div class="card-body">
       <h5 class="card-title">My product
         <a href="<?= ROOT ?>/admin/product/add">
@@ -53,6 +53,7 @@
           <tr>
             <th scope="col">#</th>
             <th scope="col">Product Name</th>
+            <th scope="col">user</th>
             <th scope="col">category</th>
             <th scope="col">Stock</th>
             <th scope="col">Color</th>
@@ -65,9 +66,10 @@
         <tbody>
         <?php foreach($rows as $row):?>
           <tr>
-            <th scope="row">1</th>
+            <th scope="row"><?=$row->id?></th>
             <td><?=esc($row->title)?></td>
-            <td><?=esc($row->category_id)?></td>
+            <td><?=esc($row->user_row->name ?? 'Unkmown')?></td>
+            <td><?=esc($row->category_row->category ?? 'Unknown')?></td>
             <td><?=esc($row->stock)?></td>
             <td><?=esc($row->color)?></td>
             <td><?=esc($row->price)?></td>

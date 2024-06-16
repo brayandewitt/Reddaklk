@@ -8,6 +8,14 @@ class Product_model extends Model
 {
     public $errors = [];
     protected $table = "product";
+
+    protected $afterSelect = [
+        'get_catergory',
+        'get_user',
+        'get_color',
+    ];
+    protected $beforeUpdate = [];
+
     protected $allowedColumns = [
         'id',
         'user_id',
@@ -89,4 +97,40 @@ class Product_model extends Model
         }
         return false;
     }
+
+
+
+        protected function get_catergory($rows){
+            $db = new Database();
+            if(!empty($rows[0]->category_id)){
+                foreach ($rows as $key => $row) {
+                    $query = "SELECT * FROM `categories` WHERE id = :id LIMIT 1";
+                    $categorey =  $db->query($query,['id'=>$row->category_id]);
+                    if(!empty($categorey)){
+                        $rows[$key]->category_row = $categorey[0]; 
+                    }
+                }
+            }
+
+            return $rows;
+        }
+        protected function get_user($rows){
+            $db = new Database();
+            if(!empty($rows[0]->user_id)){
+                foreach ($rows as $key => $row) {
+                    $query = "SELECT firstname, lastname, role FROM users WHERE id = :id LIMIT 1";
+                    $user =  $db->query($query,['id'=>$row->user_id]);
+                    if(!empty($user)){
+                        $user[0]->name = $user[0]->firstname.' '.$user[0]->lastname;
+                        $rows[$key]->user_row = $user[0]; 
+                    }
+                }
+            }
+
+            return $rows;
+        }
+        protected function get_color($rows){
+
+            return $rows;
+        }
 }

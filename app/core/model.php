@@ -64,6 +64,12 @@ class Model extends Database
 
         if(is_array($res))
         {
+            //run after select functions 
+            if(property_exists($this, 'afterSelect')){
+                foreach ($this->afterSelect as  $func) {
+                    $res = $this->$func($res);
+                }
+            }
             return $res;
         }
         return false;
@@ -78,6 +84,12 @@ class Model extends Database
 
         if(is_array($res))
         {
+             //run after select functions 
+             if(property_exists($this, 'afterSelect')){
+                foreach ($this->afterSelect as  $func) {
+                    $res = $this->$func($res);
+                }
+            }
             return $res;
         }
         return false;
@@ -98,6 +110,13 @@ class Model extends Database
 
         if(is_array($res))
         {
+           
+            //run after select functions 
+            if(property_exists($this, 'afterSelect')){
+                foreach ($this->afterSelect as  $func) {
+                    $res = $this->$func($res);
+                }
+            }
             return $res[0];
         }
         return false;
