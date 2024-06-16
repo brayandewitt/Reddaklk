@@ -95,6 +95,10 @@
                           <i class="text-white bi bi-upload"></i>
                           <input class="js-profile-image-input" onchange="load_image(this.files[0])" type="file" name="image" style="display: none;">
                         </label>
+                        <?php if (!empty($errors['image'])) : ?>
+                      <span class="js-error-image text-danger  font-weight-bold"><?= $errors['image'] ?></span>
+                    <?php endif; ?>
+                    <span class="js-error-image text-danger  font-weight-bold"></span>
                         <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
                       </div>
                     </div>
@@ -106,8 +110,9 @@
                       <input name="firstname" type="text" class="form-control" id="firstname" value="<?= set_value('firstname', $row->firstname) ?>" required>
                     </div>
                     <?php if (!empty($errors['firstname'])) : ?>
-                      <span class="text-danger  font-weight-bold"><?= $errors['firstname'] ?></span>
+                      <span class="js-error-firstname text-danger font-weight-bold"><?= $errors['firstname'] ?></span>
                     <?php endif; ?>
+                    <span class="js-error-firstname text-danger font-weight-bold"></span>
                   </div>
                   <div class="row mb-3">
                     <label for="lastname" class="col-md-4 col-lg-3 col-form-label">last Name</label>
@@ -115,8 +120,9 @@
                       <input name="lastname" type="text" class="form-control" id="lastname" value="<?= set_value('lastname', $row->lastname) ?>" required>
                     </div>
                     <?php if (!empty($errors['lastname'])) : ?>
-                      <span class="text-danger  font-weight-bold"><?= $errors['lastname'] ?></span>
+                      <span class="js-error-lastname text-danger  font-weight-bold"><?= $errors['lastname'] ?></span>
                     <?php endif; ?>
+                    <span class="js-error-lastname text-danger  font-weight-bold"></span>
                   </div>
                   <div class="row mb-3">
                     <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
@@ -124,8 +130,9 @@
                       <input name="address" type="text" class="form-control" id="Address" value="<?= set_value('address', $row->address) ?>">
                     </div>
                     <?php if (!empty($errors['address'])) : ?>
-                      <span class="text-danger  font-weight-bold"><?= $errors['address'] ?></span>
+                      <span class="js-error-address text-danger  font-weight-bold"><?= $errors['address'] ?></span>
                     <?php endif; ?>
+                    <span class="js-error-address text-danger  font-weight-bold"></span>
                   </div>
 
                   <div class="row mb-3">
@@ -134,8 +141,9 @@
                       <input name="mobile" type="text" class="form-control" id="Phone" value="<?= set_value('mobile', $row->mobile) ?>">
                     </div>
                     <?php if (!empty($errors['mobile'])) : ?>
-                      <span class="text-danger  font-weight-bold"><?= $errors['mobile'] ?></span>
+                      <span class="js-error-phone text-danger  font-weight-bold"><?= $errors['mobile'] ?></span>
                     <?php endif; ?>
+                    <span class="js-error-mobile text-danger  font-weight-bold"></span>
                   </div>
 
                   <div class="row mb-3">
@@ -144,8 +152,9 @@
                       <input name="email" type="email" class="form-control" id="Email" value="<?= set_value('email', $row->email) ?>" required>
                     </div>
                     <?php if (!empty($errors['email'])) : ?>
-                      <span class="text-danger  font-weight-bold"><?= $errors['email'] ?></span>
+                      <span class="js-error-email text-danger  font-weight-bold"><?= $errors['email'] ?></span>
                     <?php endif; ?>
+                    <span class="js-error-email text-danger  font-weight-bold"></span>
                   </div>
                   <div class="js-prog progress mb-2 hide">
                     <div class="progress-bar" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
@@ -333,7 +342,7 @@
       if (ajax.readyState == 4) {
         if (ajax.status == 200) {
           //alert("upload complete");
-          //window.location.reload();
+          
           handle_result(ajax.responseText);
         } else {
           alert("an error occurred");
@@ -354,10 +363,18 @@
     if(typeof obj == 'object'){
 
       if(typeof obj.errors == 'object'){
-        alert(obj.errors);
+        display_errors(obj.errors);
+        alert("Please correct the errors on the page");
       }else{
-        alert("Data saved successfully!");
+        alert("Profile data saved successfully!");
+        window.location.reload();
       }
+    }
+  }
+
+  function display_errors(errors){
+    for(key in errors){
+      document.querySelector(".js-error-"+key).innerHTML = errors[key];
     }
   }
 
