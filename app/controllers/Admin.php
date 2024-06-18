@@ -21,7 +21,7 @@ class Admin extends Controller
             message('please login to view admin section');
             redirect('login');
         }
-        
+
         $user_id = Auth::getId();
         $product = new Product_model();
         $data['action'] = $action;
@@ -30,35 +30,38 @@ class Admin extends Controller
 
         if ($action == 'add') {
             $category = new Category_model();
-           
-            
+
+
             $data['categories'] = $category->findAll('asc');
             if ($_SERVER['REQUEST_METHOD'] == "POST") {
-                if($product->validate($_POST)){
-                    
+                if ($product->validate($_POST)) {
+
                     $_POST['date'] = date("y-m-d H:i:s");
-                    $_POST['user_id'] = Auth::getId();
-                    
-                    
+                    $_POST['user_id'] = $user_id;
+                    $_POST['price_id'] = 1;
+
+
                     $product->insert($_POST);
 
-                    $row = $product->first(['user_id'=>$user_id, 'published'=>0]);
+                    $row = $product->first(['user_id' => $user_id, 'published' => 0]);
 
                     message("your Product successfully created");
-                    if($row){
+                    if ($row) {
 
-                        redirect('admin/product/edit/'.$row->$id);
-                    }else{
+                        redirect('admin/product/edit/' . $row->$id);
+                    } else {
 
-                        redirect('admin/product/edit/'.$id);
+                        redirect('admin/product/edit/' . $id);
                     }
-                 }
-                 $data['errors'] = $product->errors;
+                }
+                $data['errors'] = $product->errors;
             }
-        }else{
+        } elseif ($action == 'edit') {
+            //get course information
+            $data['row'] = $product->first(['user_id' => $user_id, 'id'=>$id]);
+        } else {
             //product view 
-            $data['rows'] = $product->where(['user_id'=>$user_id]);
-            
+            $data['rows'] = $product->where(['user_id' => $user_id]);
         }
 
         $this->view('admin/product', $data);

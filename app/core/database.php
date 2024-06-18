@@ -36,8 +36,27 @@ class Database
     }
     public function create_table()
     {
-        //user table
+        //price table
 
+        $query = "
+			CREATE TABLE IF NOT EXISTS `prices` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `name` varchar(30) NOT NULL DEFAULT '0',
+            `price` decimal(10,0) NOT NULL DEFAULT (0),
+            `disable` tinytext NOT NULL,
+            PRIMARY KEY (`id`)
+)           ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 
+            COLLATE=utf8mb4_0900_ai_ci;
+		";
+        $this->query($query);
+        // Insert price table
+
+        $query = "
+			INSERT INTO `prices` (`id`, `name`, `price`, `disable`) VALUES (1, 'Free', 0, '0');
+		";
+        $this->query($query);
+
+        //user table
         $query = "
 			CREATE TABLE IF NOT EXISTS `users`(
 			`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -64,7 +83,7 @@ class Database
         `name` varchar(100) DEFAULT NULL,
         `category_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
         `description` varchar(1000) DEFAULT NULL,
-        `price` double DEFAULT NULL,
+        `price_id` double DEFAULT NULL,
         `date` date DEFAULT NULL,
         `stock` varchar(10) DEFAULT NULL,
         `color` varchar(20) DEFAULT NULL,
