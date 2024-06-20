@@ -26,7 +26,7 @@ class Product_model extends Model
         'price_id',
         'date',
         'stock',
-        'color',
+        'color_id',
         'tags',
         'image1',
         'image2',

@@ -264,11 +264,7 @@
 <script>
   var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab") : "#profile-overview";
 
-  if (typeof tab == 'undefined') {
-
-    var tab = "#profile-edit";
-  }
-
+  
   function show_tab(tab_name) {
     const someTabTriggerEl = document.querySelector(tab_name + "-tab");
     const tab = new bootstrap.Tab(someTabTriggerEl);

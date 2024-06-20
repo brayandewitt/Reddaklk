@@ -52,24 +52,30 @@
       <!-- Bordered Tabs Justified -->
       <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
         <li class="nav-item flex-fill" role="presentation">
-          <button class="nav-link w-100 active" id="home-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
+          <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100 active" id="productdetails-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-productdetails" type="button" role="tab" aria-controls="productdetails" aria-selected="true">Product details</button>
         </li>
         <li class="nav-item flex-fill" role="presentation">
-          <button class="nav-link w-100" id="profile-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
+          <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="price-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-price" type="button" role="tab" aria-controls="price" aria-selected="false">Price</button>
         </li>
         <li class="nav-item flex-fill" role="presentation">
-          <button class="nav-link w-100" id="contact-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
+          <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="images-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-images" type="button" role="tab" aria-controls="images" aria-selected="false">Images</button>
+        </li>
+        <li class="nav-item flex-fill" role="presentation">
+          <button onclick="set_tab(this.getAttribute('data-bs-target'))" class="nav-link w-100" id="promotions-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-promotions" type="button" role="tab" aria-controls="promotions" aria-selected="false">Promotion</button>
         </li>
       </ul>
       <div class="tab-content pt-2" id="borderedTabJustifiedContent">
-        <div class="tab-pane fade show active" id="bordered-justified-home" role="tabpanel" aria-labelledby="home-tab">
-          Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
+        <div class="tab-pane fade show active" id="bordered-justified-productdetails" role="tabpanel" aria-labelledby="productdetails-tab">
+          1Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.
         </div>
-        <div class="tab-pane fade" id="bordered-justified-profile" role="tabpanel" aria-labelledby="profile-tab">
-          Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
+        <div class="tab-pane fade" id="bordered-justified-price" role="tabpanel" aria-labelledby="price-tab">
+          2Nesciunt totam et. Consequuntur magnam aliquid eos nulla dolor iure eos quia. Accusantium distinctio omnis et atque fugiat. Itaque doloremque aliquid sint quasi quia distinctio similique. Voluptate nihil recusandae mollitia dolores. Ut laboriosam voluptatum dicta.
         </div>
-        <div class="tab-pane fade" id="bordered-justified-contact" role="tabpanel" aria-labelledby="contact-tab">
-          Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+        <div class="tab-pane fade" id="bordered-justified-images" role="tabpanel" aria-labelledby="images-tab">
+          3Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
+        </div>
+        <div class="tab-pane fade" id="bordered-justified-promotions" role="tabpanel" aria-labelledby="promotions-tab">
+          4Saepe animi et soluta ad odit soluta sunt. Nihil quos omnis animi debitis cumque. Accusantium quibusdam perspiciatis qui qui omnis magnam. Officiis accusamus impedit molestias nostrum veniam. Qui amet ipsum iure. Dignissimos fuga tempore dolor.
         </div>
       </div>
       <!-- End Bordered Tabs Justified -->
@@ -141,5 +147,23 @@
     </div>
   </div>
 <?php endif; ?>
+
+<script>
+  var tab = sessionStorage.getItem("tab") ? sessionStorage.getItem("tab") : "#productdetails-tab";
+
+
+
+function show_tab(tab_name) {
+  const someTabTriggerEl = document.querySelector(tab_name + "-tab");
+  const tab = new bootstrap.Tab(someTabTriggerEl);
+  tab.show();
+}
+
+function set_tab(tab_name) {
+  tab = tab_name;
+  sessionStorage.setItem("tab", tab_name);
+  
+}
+</script>
 
 <?php $this->view('admin/admin-footer', $data) ?>
